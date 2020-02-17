@@ -1,0 +1,150 @@
+@import url('https://fonts.googleapis.com/css?family=Coda+Caption:800&display=swap');
+.custom-nav a {
+    text-decoration: none;
+    font-family: 'Nunito', sans-serif;
+    text-transform: uppercase;
+    color: #555;
+    font-weight: 900;
+}
+
+.banner {
+    width: 100%;
+    background: url('../static/peoples.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    position: relative;
+}
+
+.banner .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgb(121, 9, 56);
+    background: linear-gradient(90deg, rgba(121, 9, 56, 0.9724264705882353) 35%, rgba(255, 0, 176, 0.8183648459383753) 100%);
+}
+
+.banner .overlay h1 {
+    font-weight: 900;
+    font-family: 'Coda Caption', sans-serif;
+}
+
+.banner .overlay .btn {
+    font-size: 14px;
+    color: #ffffff;
+    padding: 10px 40px;
+    transition: 0.4s;
+    text-transform: capitalize;
+    font-family: 'Coda Caption', sans-serif;
+    background: rgb(78, 6, 36);
+}
+
+.banner .overlay .btn:hover {
+    background: #ffffff;
+    color: #555;
+}
+
+/* Section 2 */
+
+.section-2 {
+    width: 100%;
+    background: url('../static/laptop.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.section-2 .overlay {
+    background: rgba(2, 11, 113, 0.623);
+    background: linear-gradient(90deg, rgba(2, 11, 113, 0.61) 35%, rgba(2, 11, 113, 0.671) 100%);
+}
+
+.section-2 .overlay i {
+    font-size: 20px;
+    background: white;
+    padding: 10px 8px;
+}
+
+.section-2 .overlay .icon-2 {
+    padding: 10px 11px;
+}
+
+.section-2 .overlay .icon-3 {
+    padding: 10px 10px;
+}
+
+.section-3 {
+    background: #333333;
+}
+
+.footer {
+    background: #d91254;
+    padding-top: 70px;
+    padding-bottom: 70px;
+}
+
+.footer h2 {
+    font-weight: 900;
+    font-family: 'Coda Caption', sans-serif;
+}
+
+@media(max-width: 576px) {
+    .banner {
+        height: 200px;
+    }
+    .banner .overlay h1 {
+        font-size: 30px;
+    }
+    .section-2 .overlay .container {
+        padding-top: 70px;
+        padding-bottom: 70px;
+    }
+    .section-3 {
+        padding-top: 70px;
+        padding-bottom: 70px;
+    }
+}
+
+@media(min-width: 576px) {
+    .banner {
+        height: 250px;
+    }
+    .banner .overlay h1 {
+        font-size: 60px;
+    }
+    .section-2 .overlay .container {
+        padding-top: 120px;
+        padding-bottom: 120px;
+    }
+    .section-3 {
+        padding-top: 120px;
+        padding-bottom: 120px;
+    }
+}
+
+@media(min-width: 992px) {
+    .banner {
+        height: 430px;
+    }
+}
+
+.flex-center {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    height: 100%;
+}
+
+.flex-column {
+    -ms-flex-direction: column !important;
+    -webkit-box-orient: vertical !important;
+    -webkit-box-direction: normal !important;
+    flex-direction: column !important;
+}

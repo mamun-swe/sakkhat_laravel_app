@@ -1,0 +1,207 @@
+/* Timeline */
+
+.timeline .card {
+    border-radius: 5px;
+    border: 1px solid #dfdfdf6c;
+}
+
+.timeline .card .form-control {
+    border: 0;
+}
+
+.timeline .card .file-btn {
+    border-radius: 16px;
+}
+
+.timeline .boder {
+    height: 1px;
+    background: #dfdfdfa2;
+}
+
+.file-upload {
+    position: relative;
+    display: inline-block;
+}
+
+.file-upload__label {
+    display: block;
+    padding: 4px 30px;
+    color: #222;
+    background: rgb(204, 203, 203);
+    border-radius: 16px;
+}
+
+.file-upload__input {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    font-size: 1;
+    width: 0;
+    height: 100%;
+    opacity: 0;
+}
+
+/* Posts */
+
+.timeline .posts .name {
+    font-weight: 900;
+    font-size: 15px;
+}
+
+.timeline .posts .img-box {
+    width: 100%;
+    overflow: hidden;
+}
+
+.timeline .posts .img-box img {
+    width: 100%;
+    min-height: 100%;
+}
+
+.timeline .posts .option-btn i {
+    font-size: 13px;
+    padding: 3px;
+}
+
+/* Show post */
+
+.show-post a {
+    font-size: 16px;
+    text-transform: capitalize;
+}
+
+.show-post .boder {
+    height: 1px;
+    background: #dfdfdf;
+}
+
+/* User Profile */
+
+.profile .profile-card {
+    overflow: hidden;
+    position: relative;
+}
+
+.profile .profile-card .cover-img {
+    width: 100%;
+}
+
+.profile .profile-card .custom-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(34, 34, 34, 0.425);
+}
+
+.profile .profile-card .custom-overlay .d-flex {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+
+.profile .profile-card .custom-overlay .profile-picture-box {
+    width: 90px;
+    height: 90px;
+    overflow: hidden;
+}
+
+.profile .profile-card .custom-overlay .profile-picture-box img {
+    min-height: 100%;
+}
+
+/* Profile edit */
+
+.profile-edit .form-box {
+    width: 100%;
+    height: 250px;
+    padding: 15px;
+    background: rgba(204, 203, 203, 0.308);
+}
+
+/* Friends */
+
+.friend .img-box {
+    width: 80px;
+    height: 80px;
+    margin: auto;
+    overflow: hidden;
+}
+
+/* Chat */
+
+.chat a {
+    color: #555555;
+    text-decoration: none;
+}
+
+.chat .card {
+    cursor: pointer;
+}
+
+.chat .card:hover {
+    background: rgb(235, 233, 233);
+}
+
+.chat .card .card-body {
+    padding: 15px;
+}
+
+.chat .profile-img-box {
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+}
+
+/* Chatting */
+
+.chatting .card {
+    width: 100%;
+    height: 83vh;
+}
+
+.chatting .card .card-body {
+    overflow-y: scroll;
+}
+
+.chatting .card .card-body #senderMessages .message {
+    background: #e4e5e6;
+    padding: 5px 15px;
+    border-radius: 16px;
+    max-width: 45%;
+    margin-left: auto;
+}
+
+.chatting .card .card-body #reciverMessages .message {
+    background: #e4e5e6;
+    padding: 5px 15px;
+    border-radius: 16px;
+    max-width: 45%;
+}
+
+@media(max-width: 576px) {
+    .timeline .posts .img-box {
+        height: 200px;
+    }
+    .profile .profile-card {
+        height: 150px;
+    }
+    .friend .friend-column {
+        margin-bottom: 15px;
+    }
+}
+
+@media(min-width: 576px) {
+    .timeline .posts .img-box {
+        height: 350px;
+    }
+    .profile .profile-card {
+        height: 180px;
+    }
+    .friend .friend-column {
+        margin-bottom: 29px;
+    }
+}
