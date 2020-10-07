@@ -82,7 +82,12 @@
                             <div class="d-flex">
                             <div><a href="{{route('post.show', $postitem->id)}}" class="btn btn-light shadow-none px-3 py-1">Comment</a></div>
                                 <div class="ml-auto">
-                                    <small>112 pepole commented</small>
+                                    <small>
+                                    <?php
+                                        $comments = \App\Comment::where('post_id', '=', $postitem->id)->count();
+                                        echo $comments .' pepole commented';
+                                    ?>
+                                    </small>
                                 </div>
                             </div>
                         </div>

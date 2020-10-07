@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Post;
 use App\User;
 use Illuminate\Http\Request;
@@ -35,23 +36,35 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        $today = date('Y-m-d');
+        $posts = Post::where('uid', '=', auth()->id())
+            ->where('posted_on', '=', $today)
+            ->orderBy('posted_on', 'desc')
+            ->take(2)
+            ->get();
+
+        if (count($posts) >= 2) {
+            return redirect()->back()->with('success', 'You have cross to post limit for today .');
+        }
+
         $rules = [
-            'content'=>'required',
-            'image'=>'required',
+            'content' => 'required',
+            'image' => 'required',
         ];
-        $this->validate($request,$rules);
+        $this->validate($request, $rules);
         $file = $request->file('image');
-            $extension = $file->getClientOriginalExtension();
-            $filename = time() . '.' . $extension;
-            $file->move('posts', $filename);
-        
-            $form_data = array(
-                'uid'=> auth()->id(),
-                'content'=> $request->content,
-                'image'=> $filename,
-            );
-           
-            Post::create($form_data);
+        $extension = $file->getClientOriginalExtension();
+        $filename = time() . '.' . $extension;
+        $file->move('posts', $filename);
+
+        $form_data = array(
+            'uid' => auth()->id(),
+            'content' => $request->content,
+            'image' => $filename,
+            'posted_on' => $today,
+        );
+
+        Post::create($form_data);
         return redirect()->back()->with('success', 'Successfully posted .');
     }
 
@@ -64,7 +77,7 @@ class PostController extends Controller
     public function show($id)
     {
         $data = Post::find($id);
-        if($data){
+        if ($data) {
             $user = User::find($data->uid);
             return view('pages.posts.show', compact("data", "user"));
         } else {
@@ -81,7 +94,7 @@ class PostController extends Controller
     public function edit($id)
     {
         $data = Post::find($id);
-        return view('pages.posts.edit',compact('data'));
+        return view('pages.posts.edit', compact('data'));
     }
 
     /**
@@ -94,9 +107,9 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         $rules = [
-            'content'=>'required',
+            'content' => 'required',
         ];
-        $this->validate($request,$rules);
+        $this->validate($request, $rules);
         $record = Post::find($id);
         $record->update($request->all());
         return redirect()->back()->with('success', 'Update successfully');
@@ -110,7 +123,7 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        Post::where('id',$id)->delete();
+        Post::where('id', $id)->delete();
         return redirect()->back()->with('success', 'Delete successfully');
     }
 }

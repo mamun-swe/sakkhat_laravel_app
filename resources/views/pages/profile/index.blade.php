@@ -45,13 +45,10 @@
                         <button type="button" class="btn btn-light btn-sm shadow-none px-4 py-1 active"><h6 class="mb-0"><b>Your posts</b></h6></button>
                     </div>
                 <div>
-                    <a href="{{route('friend.list')}}" class="btn btn-light btn-sm shadow-none px-4 py-1 active ml-1"><h6 class="m-0"><b>Friends</b></h6></a>
+                    <a href="{{route('friend.index')}}" class="btn btn-light btn-sm shadow-none px-4 py-1 active ml-1"><h6 class="m-0"><b>Friends</b></h6></a>
                 </div>
                 <div>
-                    <a href="{{route('friend.suggested')}}" class="btn btn-light btn-sm shadow-none px-4 py-1 active ml-1"><h6 class="m-0"><b>Find Friends</b></h6></a>
-                </div>
-                <div>
-                    <a href="{{route('friend.request')}}" class="btn btn-light btn-sm shadow-none px-4 py-1 active ml-1"><h6 class="m-0"><b>Friend Requests</b></h6></a>
+                    <a href="{{route('friend.index')}}" class="btn btn-light btn-sm shadow-none px-4 py-1 active ml-1"><h6 class="m-0"><b>About</b></h6></a>
                 </div>
                 </div>
                 @else

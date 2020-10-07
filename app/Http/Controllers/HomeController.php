@@ -24,7 +24,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $posts = User::join('posts', 'users.id', '=', 'posts.uid')->orderBy('posts.id', 'DESC')->paginate(10);
+        $posts = User::join('posts', 'users.id', '=', 'posts.uid')
+            ->orderBy('posts.id', 'DESC')
+            ->paginate(10);
+        // dd($posts);
         return view('pages.home', compact('posts'));
     }
 }

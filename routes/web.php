@@ -20,11 +20,16 @@ Route::get('edit-profile/{id?}', 'ProfileController@edit')->name('profile.edit')
 Route::put('update-profile-image/{id?}', 'ProfileController@updateProfilePic')->name('profile.update.image')->middleware('auth');
 Route::put('update-profile-cover/{id?}', 'ProfileController@updateCoverPic')->name('profile.update.cover')->middleware('auth');
 // Friend Controllers
-Route::get('suggested-friends', 'FriendController@suggestedFriends')->name('friend.suggested')->middleware('auth');
-Route::get('add-friend/{id?}', 'FriendController@addFriend')->name('friend.add')->middleware('auth');
-Route::get('all-friend', 'FriendController@allFriends')->name('friend.list')->middleware('auth');
-Route::get('friend-request', 'FriendController@friendRequests')->name('friend.request')->middleware('auth');
-Route::get('request-accept/{id}', 'FriendController@acceptRequest')->name('request.accept')->middleware('auth');
+// Route::get('suggested-friends', 'FriendController@suggestedFriends')->name('friend.suggested')->middleware('auth');
+// Route::get('add-friend/{id?}', 'FriendController@addFriend')->name('friend.add')->middleware('auth');
+// Route::get('all-friend', 'FriendController@allFriends')->name('friend.list')->middleware('auth');
+// Route::get('friend-request', 'FriendController@friendRequests')->name('friend.request')->middleware('auth');
+// Route::get('request-accept/{id}', 'FriendController@acceptRequest')->name('request.accept')->middleware('auth');
+
+Route::get('friends', 'FriendController@index')->name('friend.index')->middleware('auth');
+Route::post('send-request/{id}', 'FriendController@sendRequest')->name('request.send')->middleware('auth');
+
+
 // Chat Controllers
 Route::get('/chat', 'ChatController@index')->name('chat.index')->middleware('auth');
 Route::get('/chatting/{id}', 'ChatController@goChat')->name('chat.message')->middleware('auth');
