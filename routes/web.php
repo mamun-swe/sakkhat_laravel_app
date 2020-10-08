@@ -28,6 +28,7 @@ Route::put('update-profile-cover/{id?}', 'ProfileController@updateCoverPic')->na
 
 Route::get('friends', 'FriendController@index')->name('friend.index')->middleware('auth');
 Route::post('send-request/{id}', 'FriendController@sendRequest')->name('request.send')->middleware('auth');
+Route::post('cancel-request/{id}', 'FriendController@cancelRequest')->name('request.cancel')->middleware('auth');
 
 
 // Chat Controllers
