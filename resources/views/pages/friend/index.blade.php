@@ -68,13 +68,9 @@
                     </div>
                     <a href="" class="text-capitalize font-weight-bold mb-1">{{$requests->name}}</a>
                     <div class="mt-2">
-                        <form action="" method="POST">
+                        <form action="{{ route('request.accept', $requests['id']) }}" method="POST">
                             @csrf
                             <button type="submit" class="btn btn-sm btn-primary shadow-none font-weight-bold btn-block">Confirm</button>
-                        </form>
-                        <form action="" method="POST">
-                            @csrf
-                            <button type="submit" class="btn btn-sm btn-light shadow-none font-weight-bold btn-block mt-2">Cancel</button>
                         </form>
                     </div>
                 </div>
@@ -92,16 +88,18 @@
 
     <div class="row mb-2">
 
+        @foreach($all_my_friends as $friend)
         <div class="col-6 col-sm-4 col-md-3 col-lg-2 friend-column px-2">
             <div class="card border-0 text-center shadow-sm">
                 <div class="card-body py-4">
                     <div class="img-box rounded-circle mb-2">
                             <img src="{{url('')}}/static/deafult_profile.png" class="img-fluid">
                     </div>
-                    <a href="" class="text-capitalize font-weight-bold mb-1">fdgddf</a>
+                    <a href="" class="text-capitalize font-weight-bold mb-1">{{$friend['name']}}</a>
                 </div>
             </div>
         </div>
+        @endforeach
        
     </div>
 
