@@ -68,7 +68,12 @@
             <div class="card border-0 text-center shadow-sm">
                 <div class="card-body py-4">
                     <div class="img-box rounded-circle mb-2">
+                            <!-- <img src="{{url('')}}/static/deafult_profile.png" class="img-fluid"> -->
+                        @if ($requests['image'] == '0')
                             <img src="{{url('')}}/static/deafult_profile.png" class="img-fluid">
+                        @else
+                            <img src="{{url('')}}/profile/{{$requests['image']}}" class="img-fluid">
+                        @endif
                     </div>
                     <a href="" class="text-capitalize font-weight-bold mb-1">{{$requests['name']}}</a>
                     <div class="mt-2">
@@ -101,7 +106,11 @@
             <div class="card border-0 text-center shadow-sm">
                 <div class="card-body py-4">
                     <div class="img-box rounded-circle mb-2">
+                        @if ($requests['image'] == '0')
                             <img src="{{url('')}}/static/deafult_profile.png" class="img-fluid">
+                        @else
+                            <img src="{{url('')}}/profile/{{$requests['image']}}" class="img-fluid">
+                        @endif
                     </div>
                     <a href="" class="text-capitalize font-weight-bold mb-1">{{$requests['name']}}</a>
                     <div class="mt-2">
@@ -135,7 +144,11 @@
             <div class="card border-0 text-center shadow-sm">
                 <div class="card-body py-4">
                     <div class="img-box rounded-circle mb-2">
+                        @if ($friend['image'] == '0')
                             <img src="{{url('')}}/static/deafult_profile.png" class="img-fluid">
+                        @else
+                            <img src="{{url('')}}/profile/{{$friend['image']}}" class="img-fluid">
+                        @endif
                     </div>
                     <a href="{{ route('profile.show', $friend['id']) }}" class="text-capitalize font-weight-bold mb-1">{{$friend['name']}}</a>
                 </div>

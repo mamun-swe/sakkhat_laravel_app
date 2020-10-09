@@ -64,7 +64,7 @@ class FriendController extends Controller
 
         foreach ($requests_for_add as $request) {
             $requested_to_me[] = array("id" => $request->id, "name" => $request->name, "image" => $request->profile_image, "status" => $request->status);
-            $requests_friends_ids[] = array($requests->friend_one);
+            $requests_friends_ids[] = array($request->friend_one);
         }
 
         // Friends which in my list
