@@ -17,6 +17,7 @@ Route::get('about-create', 'AboutController@create')->name('about.create')->midd
 Route::post('about-store', 'AboutController@store')->name('about.store')->middleware('auth');
 Route::get('about/{id}/edit', 'AboutController@edit')->name('about.edit')->middleware('auth');
 Route::put('about/{id}/update', 'AboutController@update')->name('about.update')->middleware('auth');
+// Route::get('about/{id}/show', 'AboutController@show')->name('about.show')->middleware('auth');
 
 // Friend Routes
 Route::get('friends', 'FriendController@index')->name('friend.index')->middleware('auth');
