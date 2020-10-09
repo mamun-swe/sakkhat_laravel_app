@@ -42,13 +42,13 @@
                 {{-- Posts --}}
                 <div class="d-flex justify-content-start">
                     <div>
-                        <button type="button" class="btn btn-light btn-sm shadow-none px-4 py-1 active"><h6 class="mb-0"><b>Your posts</b></h6></button>
+                        <button type="button" class="btn btn-light btn-sm shadow-none px-4 py-1 active"><h6 class="mb-0"><b>Posts</b></h6></button>
                     </div>
                 <div>
                     <a href="{{route('friend.index')}}" class="btn btn-light btn-sm shadow-none px-4 py-1 active ml-1"><h6 class="m-0"><b>Friends</b></h6></a>
                 </div>
                 <div>
-                    <a href="{{route('friend.index')}}" class="btn btn-light btn-sm shadow-none px-4 py-1 active ml-1"><h6 class="m-0"><b>About</b></h6></a>
+                    <a href="{{route('about.index')}}" class="btn btn-light btn-sm shadow-none px-4 py-1 active ml-1"><h6 class="m-0"><b>About</b></h6></a>
                 </div>
                 </div>
                 @else
@@ -93,7 +93,12 @@
                             <div class="d-flex">
                             <div><a href="{{route('post.show',$post->id)}}" class="btn btn-light shadow-none px-3 py-1">Comment</a></div>
                                 <div class="ml-auto">
-                                    <small>112 pepole commented</small>
+                                    <small>
+                                        <?php
+                                            $comments = \App\Comment::where('post_id', '=', $post->id)->count();
+                                            echo $comments .' pepole commented';
+                                        ?>
+                                    </small>
                                 </div>
                             </div>
                         </div>

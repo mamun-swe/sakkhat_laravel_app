@@ -35,58 +35,37 @@ class FriendController extends Controller
     // Peoples
     public function index()
     {
-        $peoples = array();
-        $requested_me_persons_id = array();
-        $after_accept_persons_id = array();
 
-        $requested_me_persons = Friend::where('friend_two', '=', $this->myId())
-            ->where('status', '=', 'pending')
-            ->get();
-        foreach ($requested_me_persons as $value) {
-            $requested_me_persons_id[] = array($value->friend_one);
-        }
+        $requests_friends_ids = array();
+        $all_suggesetd_peoples = array();
+        $sent_requests_by_me = array();
+        $requested_to_me = array();
+        $my_friends = array();
 
-        $after_accept_persons = Friend::where('friend_two', '=', $this->myId())
-            ->orWhere('friend_two', '=', $this->myId())
-            ->where('status', '=', 'confirmed')
-            ->get();
-        foreach ($after_accept_persons as $value) {
-            $after_accept_persons_id[] = array($value->friend_one or $value->friend_two);
-        }
-
-        $suggested_peoples = User::where('id', '!=', $this->myId())
-            ->whereNotIn('id', $requested_me_persons_id)
-            ->whereNotIn('id', $after_accept_persons_id)
-            ->select('id', 'name', 'profile_image')
-            ->get();
-
-        $set_requests = Friend::join('users', 'users.id', '=', 'friends.friend_two')
+        // Friend requests
+        // Friend requests send by me
+        $requested_by_me = Friend::join('users', 'users.id', '=', 'friends.friend_two')
             ->where('friend_one', '=', $this->myId())
             ->where('status', '!=', 'confirmed')
             ->select('users.id', 'users.name', 'users.profile_image', 'friends.status')
             ->get();
 
-        $my_requests = Friend::join('users', 'users.id', '=', 'friends.friend_one')
+        foreach ($requested_by_me as $requests) {
+            $sent_requests_by_me[] = array("id" => $requests->id, "name" => $requests->name, "image" => $requests->profile_image, "status" => $requests->status);
+            $requests_friends_ids[] = array($requests->friend_two);
+        }
+
+        // Request me for add
+        $requests_for_add = Friend::join('users', 'users.id', '=', 'friends.friend_one')
             ->where('friend_two', '=', $this->myId())
             ->where('status', '=', 'pending')
             ->select('users.id', 'users.name', 'users.profile_image', 'friends.status')
             ->get();
 
-        foreach ($set_requests as $requests) {
-            $peoples[] = array("id" => $requests->id, "name" => $requests->name, "image" => $requests->profile_image, "status" => $requests->status);
+        foreach ($requests_for_add as $request) {
+            $requested_to_me[] = array("id" => $request->id, "name" => $request->name, "image" => $request->profile_image, "status" => $request->status);
+            $requests_friends_ids[] = array($requests->friend_one);
         }
-
-        foreach ($suggested_peoples as $suggested) {
-            $peoples[] = array("id" => $suggested->id, "name" => $suggested->name, "image" => $suggested->profile_image, "status" => $suggested->status);
-        }
-
-        $all_peoples = $this->unique_multidim_array($peoples, 'id');
-
-        //
-        //
-        //
-        // My all friends
-        $my_friends = array();
 
         // Friends which in my list
         $friends_in_my_list = Friend::join('users', 'users.id', '=', 'friends.friend_two')
@@ -95,6 +74,7 @@ class FriendController extends Controller
             ->get();
         foreach ($friends_in_my_list as $friend) {
             $my_friends[] = array("id" => $friend->id, "name" => $friend->name, "image" => $friend->profile_image);
+            $requests_friends_ids[] = array($friend->friend_two);
         }
 
         // Freinds me their list
@@ -105,12 +85,23 @@ class FriendController extends Controller
 
         foreach ($friends_me_there_list as $friend) {
             $my_friends[] = array("id" => $friend->id, "name" => $friend->name, "image" => $friend->profile_image);
+            $requests_friends_ids[] = array($friend->friend_one);
         }
+        // All friends unique
         $all_my_friends = $this->unique_multidim_array($my_friends, 'id');
-        //
-        //
 
-        return view('pages.friend.index', compact('all_peoples', 'my_requests', 'all_my_friends'));
+        //
+        //
+        // Suggested peoples
+        $suggested_peoples = User::where('id', '!=', $this->myId())
+            ->whereNotIn('id', $requests_friends_ids)
+            ->select('id', 'name', 'profile_image')
+            ->get();
+        foreach ($suggested_peoples as $suggested) {
+            $all_suggesetd_peoples[] = array("id" => $suggested->id, "name" => $suggested->name, "image" => $suggested->profile_image);
+        }
+
+        return view('pages.friend.index', compact('all_suggesetd_peoples', 'requested_to_me', 'sent_requests_by_me', 'all_my_friends'));
     }
 
     // Send Request

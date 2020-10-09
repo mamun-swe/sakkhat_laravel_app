@@ -7,7 +7,13 @@
 
     <div class="row">
         <div class="col-12">
-            <h5>Suggested Friends</h5>
+
+            @if($all_suggesetd_peoples)
+            <h5>Suggested Friends ( {{count($all_suggesetd_peoples)}} )</h5>
+            @else
+            <h5>Suggested Friends (0)</h5>
+            @endif
+
             @if(Session::has('success'))
                 <p class="text-success">{{Session::get('success')}}</p>
             @endif
@@ -17,9 +23,9 @@
         </div>
     </div>
 
+    <!-- Suggested Peoples -->
     <div class="row">
-
-        @foreach($all_peoples as $people)
+        @foreach($all_suggesetd_peoples as $people)
         <div class="col-6 col-sm-4 col-md-3 col-lg-2 friend-column px-2">
             <div class="card border-0 text-center shadow-sm">
                 <div class="card-body py-4">
@@ -33,17 +39,10 @@
                     <a href="" class="text-capitalize font-weight-bold mb-1">{{$people['name']}}</a>
 
                     <div class="mt-2">
-                        @if($people['status'] == 'pending')
-                            <form action="{{ route('request.cancel', $people['id']) }}" method="POST">
-                                @csrf
-                                <button type="submit" class="btn btn-sm btn-light text-black shadow-none font-weight-bold btn-block">Calcel Request</button>
-                            </form>
-                        @elseif(!$people['status'])
                         <form action="{{ route('request.send', $people['id']) }}" method="POST">
                             @csrf
                             <button type="submit" class="btn btn-sm btn-primary shadow-none font-weight-bold btn-block">Add Friend</button>
                         </form>
-                        @endif
                     </div>
                 </div>
             </div>
@@ -51,22 +50,27 @@
         @endforeach
     </div>
 
+
+    <!-- Friends request me for add -->
     <div class="row">
         <div class="col-12">
-            <h5>Friend Requests</h5>
+            @if($requested_to_me)
+            <h5>Friend Requests ( {{count($requested_to_me)}} )</h5>
+            @else
+            <h5>Friend Requests (0)</h5>
+            @endif
         </div>
     </div>
 
     <div class="row">
-
-        @foreach($my_requests as $requests)
+        @foreach($requested_to_me as $requests)
         <div class="col-6 col-sm-4 col-md-3 col-lg-2 friend-column px-2">
             <div class="card border-0 text-center shadow-sm">
                 <div class="card-body py-4">
                     <div class="img-box rounded-circle mb-2">
                             <img src="{{url('')}}/static/deafult_profile.png" class="img-fluid">
                     </div>
-                    <a href="" class="text-capitalize font-weight-bold mb-1">{{$requests->name}}</a>
+                    <a href="" class="text-capitalize font-weight-bold mb-1">{{$requests['name']}}</a>
                     <div class="mt-2">
                         <form action="{{ route('request.accept', $requests['id']) }}" method="POST">
                             @csrf
@@ -77,12 +81,50 @@
             </div>
         </div>
         @endforeach
-       
+    </div>
+
+
+    <!-- Sent Friend requests -->
+    <div class="row">
+        <div class="col-12">
+            @if($sent_requests_by_me)
+            <h5>Sent Requests ( {{count($sent_requests_by_me)}} )</h5>
+            @else
+            <h5>Sent Requests (0)</h5>
+            @endif
+        </div>
     </div>
 
     <div class="row">
+        @foreach($sent_requests_by_me as $requests)
+        <div class="col-6 col-sm-4 col-md-3 col-lg-2 friend-column px-2">
+            <div class="card border-0 text-center shadow-sm">
+                <div class="card-body py-4">
+                    <div class="img-box rounded-circle mb-2">
+                            <img src="{{url('')}}/static/deafult_profile.png" class="img-fluid">
+                    </div>
+                    <a href="" class="text-capitalize font-weight-bold mb-1">{{$requests['name']}}</a>
+                    <div class="mt-2">
+                        <form action="{{ route('request.cancel', $requests['id']) }}" method="POST">
+                            @csrf
+                            <button type="submit" class="btn btn-sm btn-light shadow-none font-weight-bold btn-block">Cancel</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endforeach
+    </div>
+
+
+    <!-- My Friends -->
+    <div class="row">
         <div class="col-12">
-            <h5>Your Friends</h5>
+            @if($all_my_friends)
+            <h5>Your Friends ( {{count($all_my_friends)}} )</h5>
+            @else
+            <h5>Your Friends (0)</h5>
+            @endif
         </div>
     </div>
 
@@ -95,12 +137,12 @@
                     <div class="img-box rounded-circle mb-2">
                             <img src="{{url('')}}/static/deafult_profile.png" class="img-fluid">
                     </div>
-                    <a href="" class="text-capitalize font-weight-bold mb-1">{{$friend['name']}}</a>
+                    <a href="{{ route('profile.show', $friend['id']) }}" class="text-capitalize font-weight-bold mb-1">{{$friend['name']}}</a>
                 </div>
             </div>
         </div>
         @endforeach
-       
+
     </div>
 
 

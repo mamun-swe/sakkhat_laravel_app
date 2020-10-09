@@ -7,22 +7,22 @@
             <div class="col-12 col-lg-6 m-auto">
 
             
-                @foreach ($friendOne as $friend)
-                <a href="{{route('chat.message', $friend->id)}}">
-                    <div class="card border-0 mb-2 friend">
+                @foreach ($all_my_friends as $friend)
+                <a href="{{route('chat.message', $friend['id'])}}">
+                    <div class="card friend rounded-0 border-left-0 border-top-0 border-right-0 border-bottom">
                         <div class="card-body">
                             <div class="d-flex">
                                 <div>
                                     <div class="profile-img-box rounded-circle">
-                                        @if ($friend->profile_image == '0')
+                                        @if ($friend['image'] == '0')
                                             <img src="{{url('')}}/static/deafult_profile.png" class="img-fluid profile-img">
                                         @else
-                                            <img src="{{url('')}}/profile/{{$friend->profile_image}}" class="img-fluid profile-img">
+                                            <img src="{{url('')}}/profile/{{$friend['image']}}" class="img-fluid profile-img">
                                         @endif
                                     </div>
                                 </div>
                                 <div class="pl-3 pt-3">
-                                    <h6 class="text-capitalize font-weight-bold">{{$friend->name}}</h6>
+                                    <h6 class="text-capitalize font-weight-bold">{{$friend['name']}}</h6>
                                 </div>
                             </div>
                         </div>

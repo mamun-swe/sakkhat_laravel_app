@@ -33,7 +33,7 @@
             <div class="overlay">
                 <div class="flex-center flex-column text-center">
                     <h1 class="font-weight-bold text-white mb-4">Sakkhat</h1>
-                    <a href="" class="btn rounded-0 shadow-none">Let's Start</a>
+                    <a href="{{ route('home') }}" class="btn rounded-0 shadow-none">Let's Start</a>
                 </div>
             </div>
         </div>

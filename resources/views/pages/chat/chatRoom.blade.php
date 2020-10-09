@@ -2,6 +2,7 @@
 @section('content')
 
 
+
 <div class="chatting">
     <div class="container">
         <div class="row">
@@ -21,15 +22,27 @@
                         @endif
                     </div>
                     <div class="card-body">
-                       
-                        <div id="senderMessages" class="text-right"></div>
-                        <div id="reciverMessages" class="text-left"></div>
+
+                        @foreach($sortedMessages as $message)
+                            @if($message['sender_id'] == auth()->user()->id)
+                            <div class="my-message text-right">
+                                <p>{{$message['message']}}</p>
+                                <small>{{ \Carbon\Carbon::parse($message['time'])->format('M d, Y')}}</small>
+                            </div>
+                            @else
+                            <div class="other-message">
+                                <p>{{$message['message']}}</p>
+                                <small>{{ \Carbon\Carbon::parse($message['time'])->format('M d, Y')}}</small>
+                            </div>
+                            @endif
+                        @endforeach
+
                         
                     </div>
                     <div class="card-footer bg-white">
                     <form action="{{ route('message.sent') }}" method="post">
                         @csrf
-                        <input type="hidden" name="reciver_id" value="{{$reciverId}}">
+                        <input type="hidden" name="reciver_id" value="{{$id}}">
                             <div class="input-group">
                                 <textarea class="form-control rounded-0 shadow-none border-0 pl-0" placeholder="Write message ..." name="message_content" rows="2"></textarea>
                                 <div class="input-group-prepend">
@@ -46,8 +59,8 @@
         </div>
     </div>
 </div>
-
-<script>
+@endsection
+<!-- <script>
     $(document).ready(function(){
             var id = (location.pathname).substr(10);
             $.ajax({
@@ -78,8 +91,8 @@
             });
     });
 </script>
-@endsection
+
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
 integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
 crossorigin="anonymous"></script>
-<script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> -->

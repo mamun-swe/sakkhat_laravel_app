@@ -167,19 +167,41 @@
     overflow-y: scroll;
 }
 
-.chatting .card .card-body #senderMessages .message {
-    background: #e4e5e6;
+.chatting .card .card-body .my-message {
+    margin-top: 10px;
+}
+
+.chatting .card .card-body .my-message p {
+    color: #fff;
+    font-size: 16px;
+    margin-bottom: 0;
+    background: #5f93c7;
     padding: 5px 15px;
-    border-radius: 16px;
+    border-radius: 25px;
     max-width: 45%;
     margin-left: auto;
 }
 
-.chatting .card .card-body #reciverMessages .message {
-    background: #e4e5e6;
+.chatting .card .card-body .my-message small {
+    margin-right: 10px;
+}
+
+.chatting .card .card-body .other-message {
+    margin-top: 10px;
+}
+
+.chatting .card .card-body .other-message p {
+    color: #000;
+    font-size: 16px;
+    margin-bottom: 0;
+    background: #cecfcf;
     padding: 5px 15px;
     border-radius: 16px;
     max-width: 45%;
+}
+
+.chatting .card .card-body .other-message small {
+    margin-left: 10px;
 }
 
 @media(max-width: 576px) {
@@ -204,4 +226,23 @@
     .friend .friend-column {
         margin-bottom: 29px;
     }
+}
+
+/* About */
+
+.about .table tr td {
+    border-bottom: 1px solid #dfdfdfb4;
+}
+
+.about .table tr td h5 {
+    font-weight: 700;
+    color: #000;
+    margin-bottom: 0;
+    padding-left: 10px;
+    font-size: 15px;
+}
+
+.about .table tr td p {
+    font-size: 16px;
+    margin-bottom: 0;
 }
